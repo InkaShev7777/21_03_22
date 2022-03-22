@@ -8,10 +8,11 @@ private:
 	int month;
 	int year;
 
-	bool isSet;
+	bool _isSet; //true if the date is correct
 
 public:
 	Date(int day, int month, int year);
+	Date() = default;
 
 	//gets
 
@@ -30,13 +31,21 @@ public:
 		return this->year;
 	}
 
+	//return true if the date is correct
 	inline bool isCorrect() const
 	{
-		return this->isSet;
+		return this->_isSet;
 	}
 
 	Date& operator=(const Date& date);
 
+	//print only if the date is correct
 	friend std::ostream& operator<<(std::ostream& out, const Date& date);
+
+	friend bool operator==(const Date& date_1, const Date& date_2);
+	friend bool operator!=(const Date& date_1, const Date& date_2);
+	friend bool operator<(const Date& date_1, const Date& date_2);
+
+	virtual ~Date() {}
 };
 

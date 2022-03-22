@@ -1,12 +1,10 @@
 #include "FullName.h"
 
-bool FullName::isAllAlpha(const std::string& str) const
+bool FullName::_isAllAlpha(const std::string& str) const
 {
-	size_t size = str.length();
-
-	for (size_t i = 0; i < size; i++)
+	for (auto i = str.begin(); i != str.end(); i++)
 	{
-		if (!isalpha(str[i]))
+		if (!isalpha(*i))
 			return false;
 	}
 
@@ -24,7 +22,7 @@ void FullName::setName(const std::string& name)
 {
 	try
 	{
-		if (!this->isAllAlpha(name))
+		if (!this->_isAllAlpha(name))
 			throw "Incorrect name";
 
 		this->name = name;
@@ -37,14 +35,14 @@ void FullName::setName(const std::string& name)
 
 void FullName::setSecondName(const std::string& secondName)
 {
-	if (this->isAllAlpha(secondName))
+	if (this->_isAllAlpha(secondName))
 		this->secondName = secondName;
 
 }
 
 void FullName::setSurname(const std::string& surname)
 {
-	if (!this->isAllAlpha(surname))
+	if (this->_isAllAlpha(surname))
 		this->surname = surname;
 }
 
@@ -58,6 +56,30 @@ FullName& FullName::operator=(const FullName& fName)
 
 std::ostream& operator<<(std::ostream& out, const FullName& fName)
 {
-	out << fName.name << " " << fName.secondName << " " << fName.surname;
+	if (!fName.name.empty())
+	{
+		out << "Name: " << fName.name << "\n";
+	}
+	
+	if (!fName.secondName.empty())
+	{
+		out << "Second name: " << fName.secondName << "\n";
+	}
+	
+	if (!fName.surname.empty())
+	{
+		out << "Surname: " << fName.surname;
+	}
+
 	return out;
+}
+
+bool operator==(const FullName& fName_1, const FullName& fName_2)
+{
+	return (fName_1.name == fName_2.name && fName_1.secondName == fName_2.secondName && fName_1.surname == fName_2.surname);
+}
+
+bool operator!=(const FullName& fName_1, const FullName& fName_2)
+{
+	return !(fName_1 == fName_2);
 }

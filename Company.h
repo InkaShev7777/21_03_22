@@ -24,5 +24,15 @@ public:
 	//sets
 	void setName(const std::string& name);
 	void setPosition(const std::string& position);
+
+	friend std::ostream& operator<<(std::ostream& out, const Company& company);
+
+	friend bool operator==(const Company& company_1, const Company& company_2);
+	friend bool operator!=(const Company& company_1, const Company& company_2);
+
+	virtual ~Company()
+	{
+
+	}
 };
 

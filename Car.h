@@ -33,5 +33,13 @@ public:
 	void setNumber(const std::string& number);
 
 	friend std::ostream& operator<<(std::ostream& out, const Car& car);
+
+	friend bool operator==(const Car& car_1, const Car& car_2);
+	friend bool operator!=(const Car& car_1, const Car& car_2);
+
+	virtual ~Car()
+	{
+
+	}
 };
 

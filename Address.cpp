@@ -30,22 +30,28 @@ void Address::setAppartment(int app)
 	this->app = app;
 }
 
+bool Address::isEmpty() const
+{
+	return this->country.empty() && this->city.empty() && this->street.empty() && this->house.empty() && this->app == 0;
+}
+
 std::ostream& operator<<(std::ostream& out, const Address& address)
 {
-	if (address.country != "")
-		out << "Country: " << address.country << "\n";
+	if (!address.country.empty())
+		out << "\tCountry: " << address.country << "\n";
 
-	if (address.city != "")
-		out << "City: " << address.city << "\n";
+	if (!address.city.empty())
+		out << "\tCity: " << address.city << "\n";
 
-	if (address.street != "")
-		out << "Street: " << address.street << "\n";
+	if (!address.street.empty())
+		out << "\tStreet: " << address.street << "\n";
 
-	if (address.house != "")
-		out << "House: " << address.house << "\n";
+	if (!address.house.empty())
+		out << "\tHouse: " << address.house << "\n";
 
 	if (address.app != 0)
-		out << "Appartment: " << address.app << "\n";
+		out << "\tAppartment: " << address.app;
+
 
 	return out;
 }

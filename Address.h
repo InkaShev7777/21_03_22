@@ -46,6 +46,14 @@ public:
 	void setHouse(const std::string& house);
 	void setAppartment(int app);
 
+	//returns true if address is empty
+	bool isEmpty() const;
+
 	friend std::ostream& operator<<(std::ostream& out, const Address& address);
+
+	virtual ~Address()
+	{
+
+	}
 };
 
