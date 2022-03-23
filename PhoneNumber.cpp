@@ -15,7 +15,11 @@ bool PhoneNumber::_isAllDigits(const std::string& str)
 
 void PhoneNumber::_setOperator()
 {
-	if (this->number.substr(0, 3) == "050" || this->number.substr(0, 3) == "066" || this->number.substr(0, 3) == "095")
+	if (this->number.empty())
+	{
+		this->_operator = Operator::Unknown;
+	}
+	else if (this->number.substr(0, 3) == "050" || this->number.substr(0, 3) == "066" || this->number.substr(0, 3) == "095")
 	{
 		this->_operator = Operator::Vodafone;
 	}

@@ -63,3 +63,25 @@ bool operator<(const Date& date_1, const Date& date_2)
 
 	return false;
 }
+
+Date getToday()
+{
+	time_t seconds = time(NULL);
+	tm today;
+	localtime_s(&today, &seconds);
+
+	return Date(today.tm_mday, today.tm_mon + 1, 1900 + today.tm_year);
+}
+
+Date getDate(const std::string& str)
+{
+	size_t pos = 0;
+	int day, month, year;
+
+	day = std::stoi(str, &pos);
+	size_t i = pos;
+	month = std::stoi(str.substr(i + 1), &pos);
+	i += pos;
+	year = std::stoi(str.substr(i + 2), &pos);
+	return Date(day, month, year);
+}

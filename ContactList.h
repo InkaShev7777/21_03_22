@@ -56,6 +56,10 @@ public:
 	void showContact(const Contact& contact, std::ostream& out = std::cout) const;
 	void showAllContacts(std::ostream& out = std::cout) const;
 
+	Contact& getContact(size_t index);
+
+	size_t size() const;
+
 	//save to the file. Returns true if the data is saved, false if it was en error during openning the file
 	bool save() const;
 

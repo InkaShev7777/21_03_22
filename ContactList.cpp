@@ -23,6 +23,12 @@ bool ContactList::_compareSurnames(const pair<Contact, Date>& contact_1, const p
 
 bool ContactList::_compareOperators(const pair<Contact, Date>& contact_1, const pair<Contact, Date>& contact_2)
 {
+	if (contact_1.first.getPhoneNumbers().empty())
+		return false;
+
+	if (contact_2.first.getPhoneNumbers().empty())
+		return true;
+
 	return contact_1.first.getPhoneNumbers().front().getOperator() < contact_2.first.getPhoneNumbers().front().getOperator();
 }
 
@@ -59,19 +65,13 @@ bool ContactList::addContact(const Contact& contact, const Date& date)
 
 size_t ContactList::deleteContact(const std::string& name)
 {
-	size_t count = 0;
+	size_t size = this->contacts.size();
 
-	for (auto i = this->contacts.begin(); i != this->contacts.end(); i++)
-	{
-		if (i->first.getFullName().getName() == name)
-		{
-			this->contacts.erase(i);
-			i--;
-			count++;
-		}
-	}
+	auto res = this->findByName(name);
 
-	return count;
+	this->contacts.erase(std::remove_if(this->contacts.begin(), this->contacts.end(), [name](auto& el) { return el.first.getFullName().getName() == name; }), this->contacts.end());
+
+	return size - this->contacts.size();
 }
 
 vector<pair<Contact, Date>> ContactList::findByName(const std::string& name) const
@@ -194,6 +194,16 @@ void ContactList::showAllContacts(std::ostream& out) const
 		this->_show(el, out);
 		out << "===============================\n";
 	}
+}
+
+Contact& ContactList::getContact(size_t index)
+{
+	return this->contacts[index].first;
+}
+
+size_t ContactList::size() const
+{
+	return this->contacts.size();
 }
 
 bool ContactList::save() const

@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<string>
 
 class Date
 {
@@ -48,4 +49,10 @@ public:
 
 	virtual ~Date() {}
 };
+
+Date getToday();
+
+
+Date getDate(const std::string& str);
+
 
